@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, ImageBackground, FlatList, TouchableOpacity, Image, Animated, TextInput, LogBox } from 'react-native';
+import {
+  StyleSheet, Text, View, Dimensions, Platform
+  , ImageBackground, FlatList, TouchableOpacity, Image, Animated, TextInput, LogBox
+} from 'react-native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -53,7 +56,7 @@ const screen1 = () => {
         <View style={{
           width: width * 0.9,
           height: height * 0.05,
-          marginTop: height * 0.06,
+          marginTop: Platform.OS === "ios" ? height * 0.06 : height * 0.05,
           alignItems: 'center',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -110,7 +113,7 @@ const screen1 = () => {
           fontWeight: 'bold',
           width: width * 0.9,
           alignSelf: 'center',
-          marginTop: 20
+          marginTop: Platform.OS === "ios" ? 20 : 10
         }} >
           Take Your Healthy Foods
         </Text>
@@ -123,7 +126,7 @@ const screen1 = () => {
         <Text style={{
           fontSize: 30,
           marginLeft: width * 0.1,
-          marginTop: 30,
+          marginTop: Platform.OS === "ios" ? 30 : 10,
           fontWeight: '400',
           width
         }}>
@@ -136,12 +139,12 @@ const screen1 = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           bounces={false}
-          contentContainerStyle={{ paddingHorizontal: width * 0.05, marginTop: 15 }}
+          contentContainerStyle={{ paddingHorizontal: width * 0.05, marginTop: Platform.OS === "ios" ? 15 : 10 }}
           renderItem={(item) => {
             return (
               <TouchableOpacity style={{
                 backgroundColor: item.item === "Salad" ? 'black' : 'rgba(255, 255, 255, 0.25)',
-                height: height * 0.05,
+                height: Platform.OS === "ios" ? height * 0.05 : height * 0.05,
                 paddingHorizontal: 20,
                 marginLeft: item.index !== 0 ? 20 : 0,
                 justifyContent: 'center',
@@ -177,21 +180,21 @@ const screen1 = () => {
             <Text style={{
               color: '#474947', fontSize: 15
             }}>Size</Text>
-            <Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold', marginTop: 5 }}>Medium</Text>
-            <Text style={{ color: 'black', fontSize: 13, marginTop: 5, fontWeight: '600' }}>$1.75</Text>
+            <Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold', marginTop: 0 }}>Medium</Text>
+            <Text style={{ color: 'black', fontSize: 13, marginTop: Platform.OS === "ios" ? 5 : 3, fontWeight: '600' }}>$1.75</Text>
 
-            <Text style={{ color: '#474947', fontSize: 15, marginTop: 20 }}>Shipping Fee</Text>
-            <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', marginTop: 5 }}>2.5 Km</Text>
-            <Text style={{ color: 'black', fontSize: 13, marginTop: 5, fontWeight: '600' }}>$0.5</Text>
+            <Text style={{ color: '#474947', fontSize: 15, marginTop: Platform.OS === "ios" ? 20 : 10 }}>Shipping Fee</Text>
+            <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', marginTop: Platform.OS === "ios" ? 5 : 3 }}>2.5 Km</Text>
+            <Text style={{ color: 'black', fontSize: 13, marginTop: Platform.OS === "ios" ? 5 : 3, fontWeight: '600' }}>$0.5</Text>
 
-            <Text style={{ color: '#474947', fontSize: 15, marginTop: 20 }}>Delievery In</Text>
-            <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', marginTop: 5, letterSpacing: 0 }}>10 min</Text>
-            <Text style={{ color: 'black', fontSize: 13, marginTop: 5, fontWeight: '600' }}>Motorbike</Text>
+            <Text style={{ color: '#474947', fontSize: 15, marginTop: Platform.OS === "ios" ? 20 : 10 }}>Delievery In</Text>
+            <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', marginTop: Platform.OS === "ios" ? 5 : 3, letterSpacing: 0 }}>10 min</Text>
+            <Text style={{ color: 'black', fontSize: 13, marginTop: Platform.OS === "ios" ? 5 : 3, fontWeight: '600' }}>Motorbike</Text>
 
             <View style={{
-              width: '70%',
-              height: '10%',
-              marginTop: 15,
+              width: Platform.OS === "ios" ? '80%' : '50%',
+              height: Platform.OS === "ios" ? '10%' : '8%',
+              marginTop: Platform.OS === "ios" ? 15 : 5,
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -200,44 +203,44 @@ const screen1 = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: 'black',
-                width: '25%',
-                height: '70%',
+                width: Platform.OS === "ios" ? '25%' : '30%',
+                height: Platform.OS === "ios" ? '70%' : '70%',
                 borderRadius: 10
               }}
 
               >
-                <Entypo name="plus" size={25} color="white" onPress={() => setCounter(counter + 1)} />
+                <Entypo name="plus" size={Platform.OS === "ios" ? 25 : 15} color="white" onPress={() => setCounter(counter + 1)} />
               </TouchableOpacity>
 
               <Text style={{
-                fontSize: 25
+                fontSize: Platform.OS === "ios" ? 25 : 20
               }}>{counter}</Text>
 
               <TouchableOpacity style={{
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: 'black',
-                width: '25%',
-                height: '70%',
+                width: Platform.OS === "ios" ? '25%' : '30%',
+                height: Platform.OS === "ios" ? '70%' : '70%',
                 borderRadius: 10
               }}
 
               >
-                <Entypo name="minus" size={25} color="white" onPress={() => setCounter(counter === 0 ? 0 : counter - 1)} />
+                <Entypo name="minus" size={Platform.OS === "ios" ? 25 : 15} color="white" onPress={() => setCounter(counter === 0 ? 0 : counter - 1)} />
               </TouchableOpacity>
             </View>
 
 
             <Text
               style={{
-                width: width * 0.94,
-                fontSize: 17,
+                width: Platform.OS === "ios" ? width * 0.94 : width * 0.75,
+                fontSize: Platform.OS === "ios" ? 17 : 15,
                 fontWeight: 'bold',
                 position: 'absolute',
-                bottom: 120,
-                left: width * 0.025,
+                bottom: 125,
+                left: Platform.OS === "ios" ? width * 0.025 : width * 0.12,
                 textAlign: 'center',
-                lineHeight: 25
+                lineHeight: Platform.OS === "ios" ? 25 : 23
               }}
 
             >Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
@@ -304,7 +307,7 @@ const cart = ({ navigation }) => {
         <View style={{
           width: width * 0.9,
           height: height * 0.05,
-          marginTop: height * 0.06,
+          marginTop: Platform.OS === "ios" ? height * 0.06 : height * 0.05,
           alignItems: 'center',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -388,7 +391,7 @@ const cart = ({ navigation }) => {
               width: width * 0.9,
               height: height * 0.2,
               alignSelf: 'center',
-              marginTop: 40,
+              marginTop: Platform.OS === "ios" ? 40 : 20,
               borderRadius: 20,
               paddingHorizontal: 30,
               paddingVertical: 10
@@ -396,7 +399,7 @@ const cart = ({ navigation }) => {
           >
             <Text style={{
               fontWeight: 'bold',
-              fontSize: 30,
+              fontSize: Platform.OS === "ios" ? 30 : 25,
               width: '60%'
             }}>Classic Fast Food</Text>
             <Text style={{
@@ -430,16 +433,16 @@ const cart = ({ navigation }) => {
 
           <View style={{
             position: 'absolute',
-            right: -30,
+            right: Platform.OS === "ios" ? -30 : -30,
             zIndex: 100,
-            top: -5,
+            top: Platform.OS === "ios" ? -5 : -8,
 
           }}>
             <Image
               source={require('./assets/plate2.png')}
               style={{
                 width: width * 0.6,
-                height: height * 0.3,
+                height: Platform.OS === "ios" ? height * 0.3 : height * 0.27,
                 resizeMode: 'contain',
                 shadowOpacity: 0.6,
                 shadowRadius: 4,
@@ -475,7 +478,7 @@ const cart = ({ navigation }) => {
           >
             <Text style={{
               fontWeight: 'bold',
-              fontSize: 30,
+              fontSize: Platform.OS === "ios" ? 30 : 25,
               width: '60%'
             }}>Can You Fry Foods</Text>
             <Text style={{
@@ -511,14 +514,14 @@ const cart = ({ navigation }) => {
             position: 'absolute',
             right: -30,
             zIndex: 100,
-            top: -25,
+            top: Platform.OS === "ios" ? -25 : -8,
 
           }}>
             <Image
               source={require('./assets/plate1.png')}
               style={{
                 width: width * 0.6,
-                height: height * 0.3,
+                height: Platform.OS === "ios" ? height * 0.3 : height * 0.27,
                 resizeMode: 'contain',
                 shadowOpacity: 0.6,
                 shadowRadius: 4,
@@ -546,7 +549,7 @@ const cart = ({ navigation }) => {
         }}>
           <Text style={{ fontSize: 40, fontWeight: 'bold' }}>Delievery Time</Text>
           <Text style={{
-            fontSize: 15, color: '#474947', width: width * 0.6, marginTop: 10, lineHeight: 20
+            fontSize: 15, color: '#474947', width: Platform.OS === "ios" ? width * 0.6 : width * 0.6, marginTop: 10, lineHeight: 20
           }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</Text>
 
           <View style={{
@@ -563,17 +566,20 @@ const cart = ({ navigation }) => {
           <Image
             source={require('./assets/panda.png')}
             style={{
-              width: '100%',
-              height: '80%',
+              width: Platform.OS === "ios" ? '100%' : '96%',
+              height: Platform.OS === "ios" ? '80%' : '72%',
               resizeMode: 'contain',
               position: 'absolute',
-              right: -90,
-              bottom: -19
+              right: Platform.OS === "ios" ? -90 : -87,
+              bottom: -19,
+              transform: [{
+                scale: Platform.OS === "ios" ? 1 : 0.95
+              }]
             }}
           />
         </View>
       </LinearGradient>
-    </ImageBackground>
+    </ImageBackground >
   )
 }
 
@@ -583,8 +589,8 @@ const home = () => {
     <Tab.Navigator tabBarOptions={{
       style: {
         width: width * 0.9,
-        height: height * 0.09,
-        bottom: 25,
+        height: Platform.OS === "ios" ? height * 0.09 : height * 0.08,
+        bottom: Platform.OS === "ios" ? 25 : 5,
         left: 20,
         alignSelf: 'center',
         alignItems: 'center',
@@ -608,15 +614,15 @@ const home = () => {
         tabBarIcon: (props) => {
           return (
             <View style={{
-              width: width * 0.12,
-              height: width * 0.12,
+              width: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
+              height: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
               borderRadius: (width * 0.15) / 2,
               backgroundColor: props.focused ? 'rgba( 255, 255, 255, 0.1 )' : '#13110b',
-              top: 15,
+              top: Platform.OS === "ios" ? 15 : 0,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              <AntDesign name="home" size={26} color="white" />
+              <AntDesign name="home" size={Platform.OS === "ios" ? 26 : 20} color="white" />
             </View>
           )
         },
@@ -625,15 +631,15 @@ const home = () => {
         tabBarIcon: (props) => {
           return (
             <View style={{
-              width: width * 0.12,
-              height: width * 0.12,
+              width: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
+              height: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
               borderRadius: (width * 0.15) / 2,
               backgroundColor: props.focused ? 'rgba( 255, 255, 255, 0.1 )' : '#13110b',
-              top: 15,
+              top: Platform.OS === "ios" ? 15 : 0,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              <AntDesign name="wallet" size={26} color="white" />
+              <AntDesign name="wallet" size={Platform.OS === "ios" ? 26 : 20} color="white" />
             </View>
           )
         }
@@ -642,15 +648,15 @@ const home = () => {
         tabBarIcon: (props) => {
           return (
             <View style={{
-              width: width * 0.12,
-              height: width * 0.12,
+              width: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
+              height: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
               borderRadius: (width * 0.15) / 2,
               backgroundColor: props.focused ? 'rgba( 255, 255, 255, 0.1 )' : '#13110b',
-              top: 15,
+              top: Platform.OS === "ios" ? 15 : 0,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              <AntDesign name="wechat" size={26} color="white" />
+              <AntDesign name="wechat" size={Platform.OS === "ios" ? 26 : 20} color="white" />
             </View>
           )
         }
@@ -659,15 +665,15 @@ const home = () => {
         tabBarIcon: (props) => {
           return (
             <View style={{
-              width: width * 0.12,
-              height: width * 0.12,
+              width: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
+              height: Platform.OS === "ios" ? width * 0.12 : width * 0.09,
               borderRadius: (width * 0.15) / 2,
               backgroundColor: props.focused ? 'rgba( 255, 255, 255, 0.1 )' : '#13110b',
-              top: 15,
+              top: Platform.OS === "ios" ? 15 : 0,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              <Ionicons name="person-outline" size={24} color="white" />
+              <Ionicons name="person-outline" size={Platform.OS === "ios" ? 24 : 20} color="white" />
             </View>
           )
         }
